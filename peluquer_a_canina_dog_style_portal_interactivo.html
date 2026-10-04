@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peluquería Canina Dog Style - Servicios, Precios y Reservas</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                        },
+                        accent: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        purpleAccent: {
+                            500: '#a855f7',
+                            600: '#9333ea',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+        h1, h2, h3, .font-heading {
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col custom-scrollbar">
+
+    <!-- Encabezado / Navegación -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('calculator')">
+                    <div class="w-12 h-12 bg-amber-500 rounded-2xl flex items-center justify-center text-white shadow-md transform rotate-3 hover:rotate-0 transition-transform">
+                        <i data-lucide="scissors" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-1">
+                            <span class="font-heading text-2xl font-bold text-slate-900 tracking-wide">Dog Style</span>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded-full">Quirihue</span>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Peluquería & Estética Canina</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex space-x-2">
+                    <button onclick="switchTab('calculator')" id="nav-calculator" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 bg-amber-500 text-white shadow-sm">
+                        <i data-lucide="calculator" class="w-4 h-4"></i>
+                        <span>Calculadora & Cotizador</span>
+                    </button>
+                    <button onclick="switchTab('prices')" id="nav-prices" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 text-slate-600 hover:bg-slate-100">
+                        <i data-lucide="list-checks" class="w-4 h-4"></i>
+                        <span>Lista de Precios</span>
+                    </button>
+                    <button onclick="switchTab('promos')" id="nav-promos" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 text-slate-600 hover:bg-slate-100 relative">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
+                        <span>Promociones</span>
+                        <span class="flex h-2 w-2 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                    </button>
+                    <button onclick="switchTab('payment')" id="nav-payment" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 text-slate-600 hover:bg-slate-100">
+                        <i data-lucide="credit-card" class="w-4 h-4"></i>
+                        <span>Datos Transferencia</span>
+                    </button>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="flex items-center space-x-3">
+                    <a href="https://wa.me/56988132806" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center space-x-2 transition-all shadow-md hover:shadow-lg transform active:scale-95">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">Agendar Hora</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Bar -->
+        <div class="md:hidden flex border-t border-slate-200 bg-white px-2 py-2 overflow-x-auto gap-1">
+            <button onclick="switchTab('calculator')" id="mobile-nav-calculator" class="mobile-nav-btn flex-1 min-w-[100px] text-center py-2 px-1 text-xs font-semibold rounded-lg bg-amber-500 text-white">Calculadora</button>
+            <button onclick="switchTab('prices')" id="mobile-nav-prices" class="mobile-nav-btn flex-1 min-w-[100px] text-center py-2 px-1 text-xs font-semibold rounded-lg text-slate-600 hover:bg-slate-100">Tarifas</button>
+            <button onclick="switchTab('promos')" id="mobile-nav-promos" class="mobile-nav-btn flex-1 min-w-[100px] text-center py-2 px-1 text-xs font-semibold rounded-lg text-slate-600 hover:bg-slate-100">Promos ✨</button>
+            <button onclick="switchTab('payment')" id="mobile-nav-payment" class="mobile-nav-btn flex-1 min-w-[100px] text-center py-2 px-1 text-xs font-semibold rounded-lg text-slate-600 hover:bg-slate-100">Transferir</button>
+        </div>
+    </header>
+
+    <!-- Promo Highlight Banner -->
+    <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white py-3 px-4 shadow-inner">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-center sm:text-left gap-2">
+            <div class="flex items-center space-x-3">
+                <span class="bg-white/20 p-1.5 rounded-lg">🐶✨</span>
+                <p class="text-sm font-medium">
+                    <strong class="font-bold">¡Súper Promo!</strong> Simparica TRIO (5-10kg) + Baño, Corte de Pelo y Uñas por solo <span class="bg-white text-orange-600 px-2 py-0.5 rounded-full font-bold text-xs">$28.000</span>
+                </p>
+            </div>
+            <button onclick="selectSimparicaPromo()" class="bg-white text-orange-600 hover:bg-orange-50 px-3 py-1 rounded-lg text-xs font-bold transition-all shadow-sm">
+                Aprovechar Promo
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- TAB 1: CALCULADORA E INTERACTIVA -->
+        <section id="tab-calculator" class="tab-content space-y-8">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200/80">
+                <div class="max-w-3xl">
+                    <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Calcula y Cotiza el Servicio Perfecto</h1>
+                    <p class="text-slate-500 mt-2 text-sm sm:text-base">Selecciona el tipo de servicio, tamaño o raza de tu perrito para obtener una cotización transparente al instante.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8">
+                    <!-- Column Left: Form Controls -->
+                    <div class="lg:col-span-7 space-y-6">
+                        
+                        <!-- 1. Categoria Principal -->
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">1. Tipo de Categoría / Servicio</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3" id="service-type-selector">
+                                <button type="button" onclick="setServiceCategory('basic')" id="cat-basic" class="cat-btn p-3 rounded-2xl border-2 border-amber-500 bg-amber-50 text-left transition-all hover:border-amber-500">
+                                    <div class="text-amber-600 mb-1"><i data-lucide="scissors" class="w-5 h-5"></i></div>
+                                    <div class="font-bold text-sm text-slate-800">Servicio Básico</div>
+                                    <div class="text-xs text-slate-500">Hasta 2cm de largo</div>
+                                </button>
+                                <button type="button" onclick="setServiceCategory('alzador')" id="cat-alzador" class="cat-btn p-3 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-white text-left transition-all">
+                                    <div class="text-slate-600 mb-1"><i data-lucide="sparkles" class="w-5 h-5"></i></div>
+                                    <div class="font-bold text-sm text-slate-800">Alzador / Tijera</div>
+                                    <div class="text-xs text-slate-500">Hasta 5cm (Sin nudos)</div>
+                                </button>
+                                <button type="button" onclick="setServiceCategory('manto')" id="cat-manto" class="cat-btn p-3 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-white text-left transition-all">
+                                    <div class="text-slate-600 mb-1"><i data-lucide="bath" class="w-5 h-5"></i></div>
+                                    <div class="font-bold text-sm text-slate-800">Recuperación Manto</div>
+                                    <div class="text-xs text-slate-500">Tratamiento especial</div>
+                                </button>
+                                <button type="button" onclick="setServiceCategory('dobleManto')" id="cat-dobleManto" class="cat-btn p-3 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-white text-left transition-all">
+                                    <div class="text-slate-600 mb-1"><i data-lucide="shield" class="w-5 h-5"></i></div>
+                                    <div class="font-bold text-sm text-slate-800">Doble Manto</div>
+                                    <div class="text-xs text-slate-500">Deslanado por raza</div>
+                                </button>
+                                <button type="button" onclick="setServiceCategory('gigante')" id="cat-gigante" class="cat-btn p-3 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-white text-left transition-all">
+                                    <div class="text-slate-600 mb-1"><i data-lucide="dog" class="w-5 h-5"></i></div>
+                                    <div class="font-bold text-sm text-slate-800">Razas Gigantes</div>
+                                    <div class="text-xs text-slate-500">Poodle Std, Pastor, etc</div>
+                                </button>
+                                <button type="button" onclick="setServiceCategory('corto')" id="cat-corto" class="cat-btn p-3 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-white text-left transition-all">
+                                    <div class="text-slate-600 mb-1"><i data-lucide="heart-pulse" class="w-5 h-5"></i></div>
+                                    <div class="font-bold text-sm text-slate-800">Pelaje Corto</div>
+                                    <div class="text-xs text-slate-500">Pug, Beagle, etc</div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 2. Tamaño / Opción Específica -->
+                        <div id="size-selection-box">
+                            <label class="block text-sm font-bold text-slate-700 uppercase tracking-wider mb-3" id="size-label">2. Selecciona el Tamaño de tu mascota</label>
+                            
+                            <!-- Opción por Tamaños Estándar (Básico, Alzador, Recuperación) -->
+                            <div id="standard-sizes" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <button type="button" onclick="setSize('pequeno')" id="size-pequeno" class="size-btn p-3 rounded-2xl border-2 border-amber-500 bg-amber-50 text-center transition-all">
+                                    <div class="font-bold text-slate-800 text-sm">Pequeño</div>
+                                    <div class="text-xs text-slate-500">Hasta 30 cm</div>
+                                </button>
+                                <button type="button" onclick="setSize('mediano')" id="size-mediano" class="size-btn p-3 rounded-2xl border-2 border-slate-200 bg-white text-center transition-all">
+                                    <div class="font-bold text-slate-800 text-sm">Mediano</div>
+                                    <div class="text-xs text-slate-500">Hasta 40 cm</div>
+                                </button>
+                                <button type="button" onclick="setSize('grande60')" id="size-grande60" class="size-btn p-3 rounded-2xl border-2 border-slate-200 bg-white text-center transition-all">
+                                    <div class="font-bold text-slate-800 text-sm">Grande (60cm)</div>
+                                    <div class="text-xs text-slate-500">Hasta 60 cm</div>
+                                </button>
+                                <button type="button" onclick="setSize('grande75')" id="size-grande75" class="size-btn p-3 rounded-2xl border-2 border-slate-200 bg-white text-center transition-all">
+                                    <div class="font-bold text-slate-800 text-sm">Grande (75cm)</div>
+                                    <div class="text-xs text-slate-500">Hasta 75 cm</div>
+                                </button>
+                            </div>
+
+                            <!-- Opciones específicas por Razas (Doble Manto / Gigantes / Pelaje Corto) -->
+                            <div id="breed-selection" class="hidden">
+                                <select id="breed-dropdown" onchange="updateBreedSelection()" class="w-full p-3 bg-white border-2 border-slate-200 rounded-2xl font-medium text-slate-800 focus:outline-none focus:border-amber-500">
+                                    <!-- Dinámico según la categoría -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 3. Adicionales o Recargos -->
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">3. Servicios Adicionales o Condición del Pelaje</label>
+                            <div class="space-y-3">
+                                <label class="flex items-center justify-between p-3 rounded-2xl border border-slate-200 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-all">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="chk-bad-coat" onchange="calculateTotal()" class="w-5 h-5 text-amber-500 rounded focus:ring-amber-400">
+                                        <div>
+                                            <span class="font-semibold text-slate-800 text-sm">Pelaje en mal estado o extra sucio</span>
+                                            <p class="text-xs text-slate-500">Nudos graves, mugre acumulada o matas</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded-lg" id="bad-coat-price">+ $3.000 / $5.000</span>
+                                </label>
+
+                                <label class="flex items-center justify-between p-3 rounded-2xl border border-amber-200 bg-amber-50/50 cursor-pointer hover:bg-amber-100/50 transition-all">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="chk-simparica" onchange="calculateTotal()" class="w-5 h-5 text-amber-500 rounded focus:ring-amber-400">
+                                        <div>
+                                            <span class="font-semibold text-slate-800 text-sm flex items-center gap-1">
+                                                <span>Añadir Pastilla Simparica TRIO</span>
+                                                <span class="bg-amber-500 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">5-10kg</span>
+                                            </span>
+                                            <p class="text-xs text-slate-500">Protección integral antiparasitaria</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-bold text-slate-700">+ $11.000</span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Column Right: Live Quote Summary Canvas Card -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-amber-950 text-white rounded-3xl p-6 shadow-xl sticky top-28 space-y-6 border border-slate-700">
+                            <div class="flex justify-between items-start border-b border-slate-700/80 pb-4">
+                                <div>
+                                    <span class="text-xs font-semibold text-amber-400 tracking-wider uppercase">Resumen de Cotización</span>
+                                    <h3 class="text-xl font-bold font-heading mt-0.5" id="summary-title">Servicio Básico</h3>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center">
+                                    <i data-lucide="receipt" class="w-5 h-5"></i>
+                                </div>
+                            </div>
+
+                            <!-- List of included items -->
+                            <div class="space-y-3 text-sm text-slate-300">
+                                <div class="flex justify-between items-center">
+                                    <span class="flex items-center space-x-2">
+                                        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+                                        <span id="summary-size-text">Tamaño Pequeño (hasta 30cm)</span>
+                                    </span>
+                                    <span class="font-bold text-white" id="summary-base-price">$20.000</span>
+                                </div>
+
+                                <div class="border-t border-slate-700/50 pt-2 space-y-2">
+                                    <div class="text-xs font-bold text-slate-400 uppercase">Incluye siempre:</div>
+                                    <ul class="text-xs space-y-1 text-slate-300 pl-2" id="summary-inclusions">
+                                        <li class="flex items-center space-x-2">
+                                            <span class="text-amber-400">•</span>
+                                            <span>Baño cosmético profesional</span>
+                                        </li>
+                                        <li class="flex items-center space-x-2">
+                                            <span class="text-amber-400">•</span>
+                                            <span>Corte de pelo según especificación</span>
+                                        </li>
+                                        <li class="flex items-center space-x-2">
+                                            <span class="text-amber-400">•</span>
+                                            <span>Corte y limado de uñas</span>
+                                        </li>
+                                        <li class="flex items-center space-x-2">
+                                            <span class="text-amber-400">•</span>
+                                            <span>Limpieza de oídos y despeje higiénico</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Addons itemized -->
+                                <div id="summary-addons" class="border-t border-slate-700/50 pt-2 space-y-2 hidden">
+                                    <div class="text-xs font-bold text-amber-400 uppercase">Adicionales seleccionados:</div>
+                                    <div id="summary-addons-list" class="text-xs space-y-1"></div>
+                                </div>
+                            </div>
+
+                            <!-- Total -->
+                            <div class="border-t border-slate-700/80 pt-4 flex justify-between items-end">
+                                <div>
+                                    <span class="text-xs text-slate-400 block">Total Estimado</span>
+                                    <span class="text-xs text-emerald-400 font-medium">Pago al finalizar servicio</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-3xl font-bold font-heading text-amber-400" id="summary-total-price">$20.000</div>
+                                </div>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="space-y-2 pt-2">
+                                <button onclick="sendWhatsAppQuote()" class="w-full bg-emerald-500 hover:bg-emerald-600 active:scale-[0.98] text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center space-x-2 shadow-lg shadow-emerald-900/30 transition-all">
+                                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                    <span>Agendar Cita vía WhatsApp</span>
+                                </button>
+                                <button onclick="switchTab('payment')" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition-all">
+                                    <i data-lucide="qr-code" class="w-4 h-4"></i>
+                                    <span>Ver Datos de Transferencia</span>
+                                </button>
+                            </div>
+
+                            <p class="text-[11px] text-center text-slate-400">📍 Atención en José Joaquín Pérez 394, Quirihue</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: LISTA DE PRECIOS COMPLETA -->
+        <section id="tab-prices" class="tab-content space-y-8 hidden">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <h2 class="text-3xl font-bold text-slate-900">Listado Oficial de Tarifas</h2>
+                <p class="text-slate-500 text-sm">Transparencia y cariño en el cuidado de cada peludito. Precios por tamaño, largo de manto y raza.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- 1. Servicio Básico -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">POPULAR</div>
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center mb-4">
+                            <i data-lucide="scissors" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 font-heading">Servicio Básico</h3>
+                        <p class="text-xs text-slate-500 mt-1">Corte hasta 2 cm de largo con máquina y retoques de tijera.</p>
+
+                        <div class="mt-6 space-y-3">
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-sm">
+                                <span class="font-medium text-slate-700">Pequeño <span class="text-xs text-slate-400">(Hasta 30cm)</span></span>
+                                <span class="font-bold text-slate-900">$20.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-sm">
+                                <span class="font-medium text-slate-700">Mediano <span class="text-xs text-slate-400">(Hasta 40cm)</span></span>
+                                <span class="font-bold text-slate-900">$23.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-sm">
+                                <span class="font-medium text-slate-700">Grande <span class="text-xs text-slate-400">(Hasta 60cm)</span></span>
+                                <span class="font-bold text-slate-900">$26.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-sm">
+                                <span class="font-medium text-slate-700">Grande <span class="text-xs text-slate-400">(Hasta 75cm)</span></span>
+                                <span class="font-bold text-slate-900">$30.000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="quickSelectCategory('basic')" class="mt-6 w-full py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-700 font-bold rounded-xl text-xs transition-colors">
+                        Cotizar este servicio
+                    </button>
+                </div>
+
+                <!-- 2. Servicio Alzador / Tijera -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center mb-4">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 font-heading">Alzador / Tijera</h3>
+                        <p class="text-xs text-slate-500 mt-1">Corte fino hasta 5 cm de largo. Exclusivo para pelajes sin nudos.</p>
+
+                        <div class="mt-6 space-y-3">
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-sm">
+                                <span class="font-medium text-slate-700">Pequeño <span class="text-xs text-slate-400">(Hasta 30cm)</span></span>
+                                <span class="font-bold text-slate-900">$25.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-sm">
+                                <span class="font-medium text-slate-700">Mediano <span class="text-xs text-slate-400">(Hasta 40cm)</span></span>
+                                <span class="font-bold text-slate-900">$28.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-sm">
+                                <span class="font-medium text-slate-700">Grande <span class="text-xs text-slate-400">(Hasta 60cm)</span></span>
+                                <span class="font-bold text-slate-900">$31.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-sm">
+                                <span class="font-medium text-slate-700">Grande <span class="text-xs text-slate-400">(Hasta 75cm)</span></span>
+                                <span class="font-bold text-slate-900">$35.000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="quickSelectCategory('alzador')" class="mt-6 w-full py-2.5 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold rounded-xl text-xs transition-colors">
+                        Cotizar este servicio
+                    </button>
+                </div>
+
+                <!-- 3. Recuperación de Manto -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4">
+                            <i data-lucide="bath" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 font-heading">Recuperación de Manto</h3>
+                        <p class="text-xs text-slate-500 mt-1">Tratamiento intensivo de hidratación, desenredo y baño restaurador.</p>
+
+                        <div class="mt-6 space-y-3">
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-sm">
+                                <span class="font-medium text-slate-700">Pequeño <span class="text-xs text-slate-400">(Desde)</span></span>
+                                <span class="font-bold text-slate-900">$35.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-sm">
+                                <span class="font-medium text-slate-700">Mediano <span class="text-xs text-slate-400">(Desde)</span></span>
+                                <span class="font-bold text-slate-900">$40.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-sm">
+                                <span class="font-medium text-slate-700">Grande 60cm <span class="text-xs text-slate-400">(Desde)</span></span>
+                                <span class="font-bold text-slate-900">$50.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-sm">
+                                <span class="font-medium text-slate-700">Grande 75cm <span class="text-xs text-slate-400">(Desde)</span></span>
+                                <span class="font-bold text-slate-900">$55.000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="quickSelectCategory('manto')" class="mt-6 w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold rounded-xl text-xs transition-colors">
+                        Cotizar este servicio
+                    </button>
+                </div>
+
+                <!-- 4. Doble Manto (Por Raza) -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
+                            <i data-lucide="shield" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 font-heading">Doble Manto</h3>
+                        <p class="text-xs text-slate-500 mt-1">Baño + Despeje Sanitario + Corte de Uñas + Deslanado intensivo.</p>
+
+                        <div class="mt-6 space-y-2">
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-xs">
+                                <span class="font-medium text-slate-700">Border Collie</span>
+                                <span class="font-bold text-slate-900">$30.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-xs">
+                                <span class="font-medium text-slate-700">Pastor Australiano</span>
+                                <span class="font-bold text-slate-900">$35.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-xs">
+                                <span class="font-medium text-slate-700">Golden Retriever</span>
+                                <span class="font-bold text-slate-900">$40.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-xs">
+                                <span class="font-medium text-slate-700">Pastor Alemán</span>
+                                <span class="font-bold text-slate-900">$45.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-xs">
+                                <span class="font-medium text-slate-700">Terranova / Boyero</span>
+                                <span class="font-bold text-slate-900">$50.000 - $55.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-xs">
+                                <span class="font-medium text-slate-700">San Bernardo</span>
+                                <span class="font-bold text-slate-900">$80.000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="quickSelectCategory('dobleManto')" class="mt-6 w-full py-2.5 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold rounded-xl text-xs transition-colors">
+                        Cotizar este servicio
+                    </button>
+                </div>
+
+                <!-- 5. Razas Cortas -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center mb-4">
+                            <i data-lucide="heart-pulse" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 font-heading">Pelaje Corto</h3>
+                        <p class="text-xs text-slate-500 mt-1">Baño + Deslanado + Barrido de Pelo Muerto + Uñas.</p>
+
+                        <div class="mt-6 space-y-2">
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-xs">
+                                <span class="font-medium text-slate-700">Pug / Bulldog Francés</span>
+                                <span class="font-bold text-slate-900">$17.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-xs">
+                                <span class="font-medium text-slate-700">Beagle</span>
+                                <span class="font-bold text-slate-900">$25.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-xs">
+                                <span class="font-medium text-slate-700">Bulldog Inglés / Basset</span>
+                                <span class="font-bold text-slate-900">$28.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 text-xs">
+                                <span class="font-medium text-slate-700">Labrador</span>
+                                <span class="font-bold text-slate-900">$35.000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="quickSelectCategory('corto')" class="mt-6 w-full py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold rounded-xl text-xs transition-colors">
+                        Cotizar este servicio
+                    </button>
+                </div>
+
+                <!-- 6. Razas Gigantes -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
+                            <i data-lucide="dog" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 font-heading">Razas Gigantes</h3>
+                        <p class="text-xs text-slate-500 mt-1">Baño Completo + Corte de Pelo + Corte de Uñas.</p>
+
+                        <div class="mt-6 space-y-3">
+                            <div class="p-3 rounded-xl bg-slate-50 space-y-1">
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="font-bold text-slate-800">Pastor Inglés</span>
+                                    <span class="font-bold text-slate-900">$45.000</span>
+                                </div>
+                                <div class="text-[11px] text-slate-500">Corte Básico hasta 2cm de largo</div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 space-y-1">
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="font-bold text-slate-800">Poodle Standard</span>
+                                    <span class="font-bold text-slate-900">$45.000</span>
+                                </div>
+                                <div class="text-[11px] text-slate-500">Corte Básico hasta 2cm de largo</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="quickSelectCategory('gigante')" class="mt-6 w-full py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded-xl text-xs transition-colors">
+                        Cotizar este servicio
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Warning note box -->
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-start space-x-3 text-amber-900 text-xs sm:text-sm">
+                <i data-lucide="alert-circle" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+                <div>
+                    <strong class="font-bold">Nota sobre el estado del pelaje:</strong> Pelaje en mal estado o extra sucio tiene un cobro adicional desde <strong>$3.000</strong> (para razas chicas) o desde <strong>$5.000</strong> (para razas medianas, grandes y doble manto).
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: PROMOCIONES -->
+        <section id="tab-promos" class="tab-content space-y-8 hidden">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <h2 class="text-3xl font-bold text-slate-900">Promociones Especiales</h2>
+                <p class="text-slate-500 text-sm">Paquetes promocionales pensados para la salud y belleza de tu mascota.</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <!-- Simparica Promo Card -->
+                <div class="bg-gradient-to-br from-orange-500 via-amber-500 to-amber-600 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden border border-orange-400">
+                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
+                    
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative z-10">
+                        <div class="space-y-4 max-w-xl">
+                            <div class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                                <span>Combo Protección + Estética</span>
+                            </div>
+
+                            <h3 class="text-2xl sm:text-3xl font-bold font-heading">Paquete Simparica TRIO + Servicio Completo</h3>
+
+                            <p class="text-orange-100 text-sm leading-relaxed">
+                                ¡Protege a tu mascota contra pulgas, garrapatas y parásitos internos mientras la dejamos hermosa y reluciente!
+                            </p>
+
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 space-y-2 border border-white/20 text-xs sm:text-sm">
+                                <div class="font-bold text-white uppercase tracking-wider text-xs">Incluye:</div>
+                                <ul class="space-y-1.5 text-orange-50">
+                                    <li class="flex items-center space-x-2">
+                                        <i data-lucide="check" class="w-4 h-4 text-emerald-300"></i>
+                                        <span><strong>1 Comprimido masticable Simparica TRIO</strong> (Perros 5 a 10 kg)</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i data-lucide="check" class="w-4 h-4 text-emerald-300"></i>
+                                        <span><strong>Baño cosmético profundo</strong> con shampoo neutro</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i data-lucide="check" class="w-4 h-4 text-emerald-300"></i>
+                                        <span><strong>Corte de pelo completo</strong> + Corte de uñas</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="w-full md:w-auto bg-white rounded-2xl p-6 text-slate-900 text-center space-y-3 shrink-0 shadow-lg">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Precio Oferta</span>
+                            <div class="text-4xl font-bold font-heading text-orange-600">$28.000</div>
+                            <span class="text-[11px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold block">Ahorras y Proteges</span>
+
+                            <button onclick="selectSimparicaPromo()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-xl text-xs transition-all shadow-md active:scale-95">
+                                Agendar este Combo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: DATOS DE TRANSFERENCIA -->
+        <section id="tab-payment" class="tab-content space-y-8 hidden">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <h2 class="text-3xl font-bold text-slate-900">Datos para Transferencia Bancaria</h2>
+                <p class="text-slate-500 text-sm">Puedes abonar o pagar el servicio con transferencia directa. Haz clic en copiar para facilidades de pago.</p>
+            </div>
+
+            <div class="max-w-xl mx-auto bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-lg space-y-6">
+                <div class="flex items-center space-x-4 border-b border-slate-100 pb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-xl">
+                        💳
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">Paga Fácil Vía Transferencia</h3>
+                        <p class="text-xs text-slate-500">Aceptamos Banco Mercado Pago / Vista / Cuenta RUT</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Item Titular -->
+                    <div class="flex justify-between items-center p-3 rounded-2xl bg-slate-50">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium block">Titular</span>
+                            <span class="text-sm font-bold text-slate-800" id="bank-name">Javier Bobadilla Micheletti</span>
+                        </div>
+                        <button onclick="copyToClipboard('Javier Bobadilla Micheletti', 'Titular')" class="p-2 hover:bg-slate-200 rounded-xl text-slate-600 transition-colors">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <!-- Item RUT -->
+                    <div class="flex justify-between items-center p-3 rounded-2xl bg-slate-50">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium block">RUT</span>
+                            <span class="text-sm font-bold text-slate-800" id="bank-rut">12881261-K</span>
+                        </div>
+                        <button onclick="copyToClipboard('12881261-K', 'RUT')" class="p-2 hover:bg-slate-200 rounded-xl text-slate-600 transition-colors">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <!-- Item Banco -->
+                    <div class="flex justify-between items-center p-3 rounded-2xl bg-slate-50">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium block">Banco / Tipo de Cuenta</span>
+                            <span class="text-sm font-bold text-slate-800">Mercado Pago (Cuenta Vista)</span>
+                        </div>
+                        <button onclick="copyToClipboard('Mercado Pago', 'Banco')" class="p-2 hover:bg-slate-200 rounded-xl text-slate-600 transition-colors">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <!-- Item N° Cuenta -->
+                    <div class="flex justify-between items-center p-3 rounded-2xl bg-slate-50">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium block">Número de Cuenta</span>
+                            <span class="text-sm font-bold text-slate-800" id="bank-acc">1029062622</span>
+                        </div>
+                        <button onclick="copyToClipboard('1029062622', 'Número de cuenta')" class="p-2 hover:bg-slate-200 rounded-xl text-slate-600 transition-colors">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <!-- Item Email -->
+                    <div class="flex justify-between items-center p-3 rounded-2xl bg-slate-50">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium block">Correo Electrónico</span>
+                            <span class="text-sm font-bold text-slate-800" id="bank-email">jbobadillamicheletti@gmail.com</span>
+                        </div>
+                        <button onclick="copyToClipboard('jbobadillamicheletti@gmail.com', 'Email')" class="p-2 hover:bg-slate-200 rounded-xl text-slate-600 transition-colors">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-center pt-2">
+                    <p class="text-xs text-slate-500">Por favor, envía el comprobante de transferencia a nuestro WhatsApp <strong>+56 9 8813 2806</strong> indicando el nombre de tu perrito.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Info Block -->
+        <div class="mt-12 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="flex items-start space-x-3">
+                <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 text-sm">Ubicación</h4>
+                    <p class="text-xs text-slate-500 mt-0.5">José Joaquín Pérez 394, Quirihue, Chile</p>
+                </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+                <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                    <i data-lucide="phone" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 text-sm">Contacto Directo</h4>
+                    <p class="text-xs text-slate-500 mt-0.5">+56 9 8813 2806</p>
+                </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+                <div class="w-10 h-10 rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center shrink-0">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 text-sm">Instagram</h4>
+                    <a href="https://instagram.com/perruqueria_dogstyle" target="_blank" class="text-xs text-amber-600 font-semibold hover:underline mt-0.5 block">@perruqueria_dogstyle</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Toast Notification for Copy -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-2xl text-xs font-semibold flex items-center space-x-2 transform translate-y-20 opacity-0 transition-all z-50">
+        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+        <span id="toast-message">Copiado al portapapeles</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Data Structures for Pricing
+        const PRICING_DATA = {
+            basic: {
+                title: "Servicio Básico (Hasta 2cm)",
+                sizes: { pequeno: 20000, mediano: 23000, grande60: 26000, grande75: 30000 },
+                badCoatFee: 3000
+            },
+            alzador: {
+                title: "Servicio Alzador / Tijera (Hasta 5cm - Sin Nudos)",
+                sizes: { pequeno: 25000, mediano: 28000, grande60: 31000, grande75: 35000 },
+                badCoatFee: 3000
+            },
+            manto: {
+                title: "Recuperación de Manto (Desde)",
+                sizes: { pequeno: 35000, mediano: 40000, grande60: 50000, grande75: 55000 },
+                badCoatFee: 5000
+            },
+            dobleManto: {
+                title: "Doble Manto (Por Raza)",
+                breeds: [
+                    { name: "Border Collie", price: 30000 },
+                    { name: "Pastor Australiano", price: 35000 },
+                    { name: "Golden Retriever", price: 40000 },
+                    { name: "Pastor Alemán", price: 45000 },
+                    { name: "Terranova", price: 50000 },
+                    { name: "Boyero de Berna", price: 55000 },
+                    { name: "San Bernardo", price: 80000 }
+                ],
+                badCoatFee: 5000
+            },
+            gigante: {
+                title: "Razas Gigantes",
+                breeds: [
+                    { name: "Pastor Inglés (Corte Básico)", price: 45000 },
+                    { name: "Poodle Standard (Corte Básico)", price: 45000 }
+                ],
+                badCoatFee: 5000
+            },
+            corto: {
+                title: "Pelaje Corto (Deslanado / Barrido)",
+                breeds: [
+                    { name: "Pug / Bulldog Francés", price: 17000 },
+                    { name: "Beagle", price: 25000 },
+                    { name: "Bulldog Inglés", price: 28000 },
+                    { name: "Basset Hound", price: 28000 },
+                    { name: "Labrador", price: 35000 }
+                ],
+                badCoatFee: 3000
+            }
+        };
+
+        // State
+        let currentCategory = 'basic';
+        let currentSize = 'pequeno';
+        let currentBreedIndex = 0;
+
+        // Initialize Icons
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            calculateTotal();
+        });
+
+        // Tab Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            // Nav style updates
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-white', 'shadow-sm');
+                btn.classList.add('text-slate-600');
+            });
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.add('bg-amber-500', 'text-white', 'shadow-sm');
+                activeNav.classList.remove('text-slate-600');
+            }
+
+            // Mobile nav style updates
+            document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-white');
+                btn.classList.add('text-slate-600');
+            });
+            const activeMobile = document.getElementById(`mobile-nav-${tabId}`);
+            if(activeMobile) {
+                activeMobile.classList.add('bg-amber-500', 'text-white');
+            }
+        }
+
+        // Set Category
+        function setServiceCategory(cat) {
+            currentCategory = cat;
+
+            // Update UI buttons
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('border-amber-500', 'bg-amber-50');
+                btn.classList.add('border-slate-200', 'bg-white');
+            });
+            const selectedBtn = document.getElementById(`cat-${cat}`);
+            if (selectedBtn) {
+                selectedBtn.classList.add('border-amber-500', 'bg-amber-50');
+                selectedBtn.classList.remove('border-slate-200', 'bg-white');
+            }
+
+            // Standard Sizes vs Breed selection display
+            const sizeBox = document.getElementById('standard-sizes');
+            const breedBox = document.getElementById('breed-selection');
+            const sizeLabel = document.getElementById('size-label');
+
+            if (['basic', 'alzador', 'manto'].includes(cat)) {
+                sizeBox.classList.remove('hidden');
+                breedBox.classList.add('hidden');
+                sizeLabel.textContent = "2. Selecciona el Tamaño de tu mascota";
+            } else {
+                sizeBox.classList.add('hidden');
+                breedBox.classList.remove('hidden');
+                sizeLabel.textContent = "2. Selecciona la Raza de tu mascota";
+
+                // Populate Dropdown
+                const dropdown = document.getElementById('breed-dropdown');
+                dropdown.innerHTML = '';
+                PRICING_DATA[cat].breeds.forEach((b, idx) => {
+                    const opt = document.createElement('option');
+                    opt.value = idx;
+                    opt.textContent = `${b.name} - $${b.price.toLocaleString('es-CL')}`;
+                    dropdown.appendChild(opt);
+                });
+                currentBreedIndex = 0;
+            }
+
+            calculateTotal();
+        }
+
+        // Set Size
+        function setSize(size) {
+            currentSize = size;
+            document.querySelectorAll('.size-btn').forEach(btn => {
+                btn.classList.remove('border-amber-500', 'bg-amber-50');
+                btn.classList.add('border-slate-200', 'bg-white');
+            });
+            const btn = document.getElementById(`size-${size}`);
+            if (btn) {
+                btn.classList.add('border-amber-500', 'bg-amber-50');
+                btn.classList.remove('border-slate-200', 'bg-white');
+            }
+            calculateTotal();
+        }
+
+        // Update Breed dropdown selection
+        function updateBreedSelection() {
+            const dropdown = document.getElementById('breed-dropdown');
+            currentBreedIndex = parseInt(dropdown.value) || 0;
+            calculateTotal();
+        }
+
+        // Calculate and Render Total
+        function calculateTotal() {
+            const data = PRICING_DATA[currentCategory];
+            let basePrice = 0;
+            let sizeOrBreedLabel = "";
+
+            if (['basic', 'alzador', 'manto'].includes(currentCategory)) {
+                basePrice = data.sizes[currentSize];
+                const labels = {
+                    pequeno: "Tamaño Pequeño (hasta 30cm)",
+                    mediano: "Tamaño Mediano (hasta 40cm)",
+                    grande60: "Tamaño Grande (hasta 60cm)",
+                    grande75: "Tamaño Grande (hasta 75cm)"
+                };
+                sizeOrBreedLabel = labels[currentSize];
+            } else {
+                const breed = data.breeds[currentBreedIndex] || data.breeds[0];
+                basePrice = breed.price;
+                sizeOrBreedLabel = `Raza: ${breed.name}`;
+            }
+
+            // Checkboxes
+            const chkBadCoat = document.getElementById('chk-bad-coat').checked;
+            const chkSimparica = document.getElementById('chk-simparica').checked;
+
+            let badCoatCost = data.badCoatFee;
+            document.getElementById('bad-coat-price').textContent = `+$${badCoatCost.toLocaleString('es-CL')}`;
+
+            let total = basePrice;
+            const addonsList = document.getElementById('summary-addons-list');
+            addonsList.innerHTML = '';
+            let hasAddons = false;
+
+            if (chkBadCoat) {
+                total += badCoatCost;
+                hasAddons = true;
+                addonsList.innerHTML += `<div class="flex justify-between text-amber-300"><span>• Pelaje extra sucio/nudos</span><span>+$${badCoatCost.toLocaleString('es-CL')}</span></div>`;
+            }
+
+            if (chkSimparica) {
+                total += 11000;
+                hasAddons = true;
+                addonsList.innerHTML += `<div class="flex justify-between text-amber-300"><span>• Comprimido Simparica TRIO (5-10kg)</span><span>+$11.000</span></div>`;
+            }
+
+            // Show/Hide Addons Container
+            const summaryAddons = document.getElementById('summary-addons');
+            if (hasAddons) {
+                summaryAddons.classList.remove('hidden');
+            } else {
+                summaryAddons.classList.add('hidden');
+            }
+
+            // Update UI elements
+            document.getElementById('summary-title').textContent = data.title;
+            document.getElementById('summary-size-text').textContent = sizeOrBreedLabel;
+            document.getElementById('summary-base-price').textContent = `$${basePrice.toLocaleString('es-CL')}`;
+            document.getElementById('summary-total-price').textContent = `$${total.toLocaleString('es-CL')}`;
+        }
+
+        // Quick select from Tariff List
+        function quickSelectCategory(cat) {
+            setServiceCategory(cat);
+            switchTab('calculator');
+        }
+
+        // Quick select Simparica Promo Combo
+        function selectSimparicaPromo() {
+            setServiceCategory('basic');
+            setSize('pequeno');
+            document.getElementById('chk-simparica').checked = true;
+            calculateTotal();
+            switchTab('calculator');
+        }
+
+        // Send WhatsApp Message with calculated details
+        function sendWhatsAppQuote() {
+            const title = document.getElementById('summary-title').textContent;
+            const sizeBreed = document.getElementById('summary-size-text').textContent;
+            const total = document.getElementById('summary-total-price').textContent;
+            
+            const chkBadCoat = document.getElementById('chk-bad-coat').checked;
+            const chkSimparica = document.getElementById('chk-simparica').checked;
+
+            let extraText = "";
+            if (chkBadCoat) extraText += "\n- Pelaje en mal estado/nudos";
+            if (chkSimparica) extraText += "\n- Incluye Pastilla Simparica TRIO (5-10kg)";
+
+            const msg = `¡Hola Peluquería Canina Dog Style! 🐶✨\nMe gustaría agendar una hora con la siguiente cotización:\n\n📌 *Servicio:* ${title}\n🐾 *Detalle:* ${sizeBreed}${extraText}\n💰 *Total Estimado:* ${total}\n\nQuedo atento a la disponibilidad de horas. ¡Muchas gracias!`;
+
+            const url = `https://wa.me/56988132806?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+
+        // Clipboard Copy Helper
+        function copyToClipboard(text, label) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            // Show Toast
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = `${label} copiado al portapapeles`;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
